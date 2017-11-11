@@ -4,7 +4,144 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,  user-scalable=no"">
     <meta charset="utf-8">
     <title>Displaying text directions with <code>setPanel()</code></title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        /*flex-wrap: wrap;*/
+        /*display: flex;*/
+      }
+	 
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+      #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
 
+      #right-panel select, #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
+      #right-panel {
+        height: 100%;
+        float: right;
+        width: 390px;
+        overflow: auto;
+      }
+      .container {
+        height: 100%;
+        float: left;
+        width: 340px;
+        background-color: /*#DCE775*/;
+        /*position: relative;*/
+        display: flex;
+        flex-wrap: wrap;
+      }
+      @media screen and (max-width: 700px){
+        .options-box{background: #FFC107;}
+      }
+      @media screen and (min-width: 700px){
+      .options-box {
+        background: #DCE775;
+        border: 1px solid #999;
+        border-radius: 3px;
+        height: 100%;
+        line-height: 35px;
+        padding: 10px 10px 30px 10px;
+        text-align: left;
+        width: 340px;
+      }
+    }
+      input {
+        font-size: 12px;
+      }
+
+       h2 {
+      padding-left: 3%;
+      display: block;
+      text-decoration: underline;
+      color: #E65100;
+      background-color: #DCEDC8;
+      }
+      h3 {
+      padding-left: 3%;
+      display: block;
+      text-decoration: underline;
+      color: #E65100;
+      background-color: #DCEDC8;
+      }
+      h4 {
+      padding-left: 3%;
+      display: block;
+      text-decoration: underline;
+      color: #E65100;
+      background-color: #DCEDC8;
+      }
+
+      #map {
+        margin-right: 400px;
+      }
+
+      img{
+        max-width: 100%;
+      }
+
+      #floating-panel {
+        background: #fff;
+        padding: 5px;
+        font-size: 14px;
+        font-family: Arial;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+      }
+		div.guides{
+			background-color: #FF9800;
+		}
+      @media print {
+        #map {
+          height: 500px;
+          margin: 0;
+        }
+
+        }
+        }
+        #right-panel {
+          float: none;
+          width: auto;
+          background: lightblue;
+          background-color: lightblue;
+        }
+      }
+    </style>
+  </head>
 
     <body>
     <div class="container">
