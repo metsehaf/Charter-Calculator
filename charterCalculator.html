@@ -282,3 +282,9 @@
         var onClickHandler = function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         };
+        document.getElementById('submit').addEventListener('click', onClickHandler);
+        var startAutocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('start'));
+        // This autocomplete is for use in the geocoder entry box.
+        var endAutocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('end'));
