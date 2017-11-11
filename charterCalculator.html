@@ -310,3 +310,9 @@
       document.getElementById('driver-hours').addEventListener('click', function(){
           createDriverWage();
       });
+      // calculate driver wage by taking the number of hours the driver will be on charter from search input
+      function createDriverWage(){
+        var hrsOfWork = document.getElementById('drivers-hours-of-work').value;
+
+        window.alert("The driver should be paid " + hrsOfWork * 14.5 + "$");
+      }
