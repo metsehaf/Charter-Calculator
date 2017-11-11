@@ -4,3 +4,44 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,  user-scalable=no"">
     <meta charset="utf-8">
     <title>Displaying text directions with <code>setPanel()</code></title>
+
+
+    <body>
+    <div class="container">
+      <div class="options-box">
+	  <img src="http://frhenrivoisinschool.ca/uploads/329/yellowschoolbuscartoon.png" alt="School Bus" width="150" height="150">
+        <h2 id="maintitle">Sharp Charter Calculator</h2>
+        <div class="guides">
+          <label>RATE: $1.21 per KM <input id="total-kms-round" type="text" placeholder="Enter total Kms round trip"></label>
+       </div>
+       <div class="guides">
+          <label>RATE: $61.75 per 1 HR <input id="Driver-Hours-over-3" type="text" placeholder="Enter total driver hours"></label>
+       </div>  
+	   <br>
+		<div class="guides">
+		  <h3>Base Rate Non Peak: $185.25</h3>
+		  <label>$50 to $100 of peak charge will be added,<select id="peak-charge" >
+			<option value=0.0>0 = No AM or PM</option>
+			<option value=50.0>1 = AM or PM Coverage</option>
+			<option value=100.0>2 = AM and PM Coverage </option>
+		  </select>if Charter is </br> during route time</label>
+		</div>
+		<br>
+       <div class="guides">
+        <h4>Drivers Pay Scale</h4>
+        <label>Base Pay: $14.50<input id="drivers-hours-of-work" type="text" placeholder="Enter Drivers hours of work"></label>
+          <input id="driver-hours" type="button" value="Submit">
+       </div>
+      </div>
+      </div>
+    <div id="floating-panel">
+      <strong>Start:</strong>
+	  <input id="start" type="text" placeholder="Enter your favorite area!">
+      <br>
+      <strong>End:</strong>
+	   <input id="end" type="text" placeholder="Enter your favorite area!">
+	   <br>
+	   <input id="submit" type="button" value="Submit">
+    </div>
+    <div id="right-panel"></div>
+    <div id="map"></div>
