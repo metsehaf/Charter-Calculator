@@ -316,3 +316,19 @@
 
         window.alert("The driver should be paid " + hrsOfWork * 14.5 + "$");
       }
+      var selectmenu = document.getElementById("peak-charge");
+	  selectmenu.onchange=function(){ //run some code when "onchange" event fires
+	  var chosenoption=this.options[this.selectedIndex]; //this refers to "selectmenu"
+		var kms = parseFloat(document.getElementById('total-kms-round').value); 
+    var hrs = parseFloat(document.getElementById('Driver-Hours-over-3').value);
+		
+	    if (chosenoption.value !== "nothing" && kms > 25){
+          
+		  window.alert("You are adding " + chosenoption.value + "$" + " to the Charter sub-total");
+		  window.alert("The Charter sub-total is " + ((((+((kms -= 25) * 1.21) + +(+hrs * 61.75)) + +(185.25 + +chosenoption.value)) * 1.13).toFixed(2) + "$"));
+        }
+		else if(chosenoption.value !== "nothing" && kms < 25){
+		 window.alert("You are adding " + chosenoption.value + "$" + " to the Charter sub-total");
+		 window.alert("The Charter sub-total is " + ((((+hrs * 61.75) + (185.25 + +chosenoption.value)) * 1.13).toFixed(2) + "$"));
+		}
+	}
