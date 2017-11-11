@@ -288,3 +288,21 @@
         // This autocomplete is for use in the geocoder entry box.
         var endAutocomplete = new google.maps.places.Autocomplete(
             document.getElementById('end'));
+        // calculate the direction by geocoding addresses from the search input
+      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING',
+		  avoidTolls: true
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+		
+      }
