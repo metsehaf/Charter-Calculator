@@ -182,3 +182,13 @@
     </div>
     <div id="right-panel"></div>
     <div id="map"></div>
+    <script>
+      function initMap() {
+        // create new DirectionRenderer and DirectionService obj, they will come handy when we calculate directions
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var directionsService = new google.maps.DirectionsService;
+		<!-- var busPath = new google.maps.Polyline; -->
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: {lat: 43.7, lng: -79.4},
+          gestureHandling: 'greedy',
