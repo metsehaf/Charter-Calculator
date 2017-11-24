@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,  user-scalable=no"">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,  user-scalable=no""> -->
     <meta charset="utf-8">
-    <title>Displaying text directions with <code>setPanel()</code></title>
+    <title>CharterCalculator <code>setPanel()</code></title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -18,7 +18,7 @@
         /*flex-wrap: wrap;*/
         /*display: flex;*/
       }
-	 
+   
       #floating-panel {
         position: absolute;
         top: 10px;
@@ -82,7 +82,12 @@
       input {
         font-size: 12px;
       }
-
+    #end{
+    font-size: 22px;
+    } 
+    #start{
+    font-size: 22px;
+    } 
        h2 {
       padding-left: 3%;
       display: block;
@@ -107,11 +112,25 @@
 
       #map {
         margin-right: 400px;
+    
       }
 
       img{
         max-width: 100%;
       }
+    
+    #charter-total{
+    color: #3fb710;
+    }
+    
+    
+    #float{
+    color:#3fb710;
+    }
+    
+    #driver-hours{
+    color: #3fb710;
+    }
 
       #floating-panel {
         background: #fff;
@@ -122,9 +141,9 @@
         box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
         display: none;
       }
-		div.guides{
-			background-color: #FF9800;
-		}
+    div.guides{
+      background-color: #FF9800;
+    }
       @media print {
         #map {
           height: 500px;
@@ -142,43 +161,46 @@
       }
     </style>
   </head>
-
-    <body>
+  <body>
     <div class="container">
       <div class="options-box">
-	  <img src="http://frhenrivoisinschool.ca/uploads/329/yellowschoolbuscartoon.png" alt="School Bus" width="150" height="150">
-        <h2 id="maintitle">Bumblbee Charter Calculator</h2>
+    <img src="http://frhenrivoisinschool.ca/uploads/329/yellowschoolbuscartoon.png" alt="School Bus" width="150" height="150">
+        <h2 id="maintitle">Charter Calculator</h2>
         <div class="guides">
           <label>RATE: $1.21 per KM <input id="total-kms-round" type="text" placeholder="Enter total Kms round trip"></label>
        </div>
        <div class="guides">
           <label>RATE: $61.75 per 1 HR <input id="Driver-Hours-over-3" type="text" placeholder="Enter total driver hours"></label>
        </div>  
-	   <br>
-		<div class="guides">
-		  <h3>Base Rate Non Peak: $185.25</h3>
-		  <label>$50 to $100 of peak charge will be added,<select id="peak-charge" >
-			<option value=0.0>0 = No AM or PM</option>
-			<option value=50.0>1 = AM or PM Coverage</option>
-			<option value=100.0>2 = AM and PM Coverage </option>
-		  </select>if Charter is </br> during route time</label>
-		</div>
-		<br>
+     <br>
+    <div class="guides">
+      <h3>Base Rate Non Peak: $185.25</h3>
+      <label>$50 to $100 of peak charge will be added,<select id="peak-charge" >
+      <option value=0.0>0 = No AM or PM</option>
+      <option value=50.0>1 = AM or PM Coverage</option>
+      <option value=100.0>2 = AM and PM Coverage </option>
+      </select>if Charter is </br> during route time</label>
+      <br>
+      <br>
+     <label><strong>Get Charter total: </strong><input id="charter-total" type="button" value="Submit"></label>
+    </div>
+    <br>  
        <div class="guides">
         <h4>Drivers Pay Scale</h4>
-        <label>Base Pay: $14.50<input id="drivers-hours-of-work" type="text" placeholder="Enter Drivers hours of work"></label>
-          <input id="driver-hours" type="button" value="Submit">
+        <label>Base Pay: $14.50 <input id="drivers-hours-of-work" type="text" placeholder="Enter Drivers hours of work"></label>
+    <br>
+          <label><strong>Get Driver pay: </strong><input id="driver-hours" type="button" value="Submit"></label>
        </div>
       </div>
       </div>
     <div id="floating-panel">
       <strong>Start:</strong>
-	  <input id="start" type="text" placeholder="Enter your favorite area!">
+    <input id="start" type="text" placeholder="enter address">
       <br>
       <strong>End:</strong>
-	   <input id="end" type="text" placeholder="Enter your favorite area!">
-	   <br>
-	   <input id="submit" type="button" value="Submit">
+     <input id="end" type="text" placeholder="enter address">
+     <br>
+     <label><strong>Get Direction: </strong><input id="float" type="button" value="Submit"><label>
     </div>
     <div id="right-panel"></div>
     <div id="map"></div>
@@ -187,13 +209,14 @@
         // create new DirectionRenderer and DirectionService obj, they will come handy when we calculate directions
         var directionsDisplay = new google.maps.DirectionsRenderer;
         var directionsService = new google.maps.DirectionsService;
-		<!-- var busPath = new google.maps.Polyline; -->
+    
+    <!-- var busPath = new google.maps.Polyline; -->
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 11,
           center: {lat: 43.7, lng: -79.4},
           gestureHandling: 'greedy',
           // Create a style for the map by assigning value to properties
-		  styles: [
+      styles: [
             {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
@@ -274,21 +297,32 @@
             }
           ]
         });
-		directionsDisplay.setMap(map);
+    
+        directionsDisplay.setMap(map);
         directionsDisplay.setPanel(document.getElementById('right-panel'));
+    
+    
+
         var control = document.getElementById('floating-panel');
         control.style.display = 'block';
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
-        var onClickHandler = function() {
+    var onClickHandler = function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         };
-        document.getElementById('submit').addEventListener('click', onClickHandler);
+    
+    document.getElementById('float').addEventListener('click', onClickHandler);
+        
         var startAutocomplete = new google.maps.places.Autocomplete(
             document.getElementById('start'));
         // This autocomplete is for use in the geocoder entry box.
         var endAutocomplete = new google.maps.places.Autocomplete(
             document.getElementById('end'));
-        // calculate the direction by geocoding addresses from the search input
+      var bounds = new google.maps.LatLngBounds();
+      startAutocomplete.bindTo('bounds', map);
+      endAutocomplete.bindTo('bounds', map);
+      }
+  
+      // calculate the direction by geocoding addresses from the search input
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         var start = document.getElementById('start').value;
         var end = document.getElementById('end').value;
@@ -296,7 +330,7 @@
           origin: start,
           destination: end,
           travelMode: 'DRIVING',
-		  avoidTolls: true
+      avoidTolls: true
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
@@ -304,37 +338,48 @@
             window.alert('Directions request failed due to ' + status);
           }
         });
-		
+    
       }
       // Add a click listener to driver-hours button to summit the # of hours worked
       document.getElementById('driver-hours').addEventListener('click', function(){
           createDriverWage();
       });
+    
+     // Add a click listener to charter-total button to summit the charter total
+      document.getElementById('charter-total').addEventListener('click', function(){
+          window.alert(selectmenu.onchange());
+      });
+      
+      
       // calculate driver wage by taking the number of hours the driver will be on charter from search input
       function createDriverWage(){
         var hrsOfWork = document.getElementById('drivers-hours-of-work').value;
 
         window.alert("The driver should be paid " + hrsOfWork * 14.5 + "$");
       }
-      var selectmenu = document.getElementById("peak-charge");
-	  selectmenu.onchange=function(){ //run some code when "onchange" event fires
-	  var chosenoption=this.options[this.selectedIndex]; //this refers to "selectmenu"
-		var kms = parseFloat(document.getElementById('total-kms-round').value); 
+
+     
+    var selectmenu = document.getElementById("peak-charge");
+    selectmenu.onchange=function(){ //run some code when "onchange" event fires
+    var chosenoption=this.options[this.selectedIndex]; //this refers to "selectmenu"
+    var kms = parseFloat(document.getElementById('total-kms-round').value); 
     var hrs = parseFloat(document.getElementById('Driver-Hours-over-3').value);
-		
-	    if (chosenoption.value !== "nothing" && kms > 25){
+    
+      if (chosenoption.value !== "nothing" && kms > 25){
+      return "The Charter sub-total is " + ((((+((kms -= 25) * 1.21) + +(+hrs * 61.75)) + +(185.25 + +chosenoption.value)) * 1.13).toFixed(2) + "$");
           
-		  window.alert("You are adding " + chosenoption.value + "$" + " to the Charter sub-total");
-		  window.alert("The Charter sub-total is " + ((((+((kms -= 25) * 1.21) + +(+hrs * 61.75)) + +(185.25 + +chosenoption.value)) * 1.13).toFixed(2) + "$"));
+      <!-- window.alert("You are adding " + chosenoption.value + "$" + " to the Charter sub-total"); -->
+      <!-- window.alert("The Charter sub-total is " + ((((+((kms -= 25) * 1.21) + +(+hrs * 61.75)) + +(185.25 + +chosenoption.value)) * 1.13).toFixed(2) + "$")); -->
         }
-		else if(chosenoption.value !== "nothing" && kms < 25){
-		 window.alert("You are adding " + chosenoption.value + "$" + " to the Charter sub-total");
-		 window.alert("The Charter sub-total is " + ((((+hrs * 61.75) + (185.25 + +chosenoption.value)) * 1.13).toFixed(2) + "$"));
-		}
-	}
-	</script>
+    else if(chosenoption.value !== "nothing" && kms < 25){
+      return "The Charter sub-total is " + ((((+hrs * 61.75) + (185.25 + +chosenoption.value)) * 1.13).toFixed(2) + "$");
+     <!-- window.alert("You are adding " + chosenoption.value + "$" + " to the Charter sub-total"); -->
+     <!-- window.alert("The Charter sub-total is " + ((((+hrs * 61.75) + (185.25 + +chosenoption.value)) * 1.13).toFixed(2) + "$")); -->
+    }
+  }
+    </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?libraries=places&key=API-Key&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyD6OLSkDZ9C6Sjl8W4wy2wulezebTyKi-E&callback=initMap">
     </script>
   </body>
 </html>
