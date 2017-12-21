@@ -84,6 +84,8 @@
       }
     #end{
     font-size: 22px;
+    margin-top: 10px;
+
     } 
     #start{
     font-size: 22px;
@@ -321,6 +323,32 @@
       startAutocomplete.bindTo('bounds', map);
       endAutocomplete.bindTo('bounds', map);
       }
+      var start = document.getElementById("start");
+
+      start.onfocus = function() {
+        if ( start.placeholder == "enter address") {
+          start.placeholder = "";
+      }
+    };
+
+      start.onblur = function() {
+        if ( start.placeholder == "") {
+          start.placeholder = "enter address";
+      }
+    };
+     var end = document.getElementById("end");
+
+      end.onfocus = function() {
+        if ( end.placeholder == "enter address") {
+          end.placeholder = "";
+      }
+    };
+
+      end.onblur = function() {
+        if ( end.placeholder == "") {
+          end.placeholder = "enter address";
+      }
+    };
   
       // calculate the direction by geocoding addresses from the search input
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -355,6 +383,11 @@
       function createDriverWage(){
         var hrsOfWork = document.getElementById('drivers-hours-of-work').value;
 
+        if (isNaN(hrsOfWork)) {
+        alert("Please enter a number!");
+        return;
+    }
+
         window.alert("The driver should be paid " + hrsOfWork * 14.5 + "$");
       }
 
@@ -365,6 +398,15 @@
     var kms = parseFloat(document.getElementById('total-kms-round').value); 
     var hrs = parseFloat(document.getElementById('Driver-Hours-over-3').value);
     
+       if (isNaN(kms)) {
+        alert("Please enter a number!");
+        return;
+    }
+      if (isNaN(hrs)) {
+        alert("Please enter a number!");
+        return;
+    }
+
       if (chosenoption.value !== "nothing" && kms > 25){
       return "The Charter sub-total is " + ((((+((kms -= 25) * 1.21) + +(+hrs * 61.75)) + +(185.25 + +chosenoption.value)) * 1.13).toFixed(2) + "$");
           
